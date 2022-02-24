@@ -9,8 +9,8 @@ var loser = 0;
 
 function setup() {
     w = 20;
-    h = 20;
-    numMines= 50;
+    h = 10;
+    numMines= 10;
 
 
     for (var i=0; i<h; i++) {
@@ -47,7 +47,7 @@ function setup() {
 
 
     
-    createCanvas(50*w, 50*h);
+    createCanvas(50*h, 50*w);
     
 }
 
@@ -110,14 +110,20 @@ function processInputC(x, y) {
     var c = (int)(y/50);
     if (isRev[r][c]) {
         var ctr = 0;
+        var youGonnaLoseCtr = 0;
         for (var i=r-1; i<r+2; i++) {
             for (var j=c-1; j<c+2; j++) {
                 if (i >=0 && j >= 0 && i<h && j<w && isFlagged[i][j]) {
+                    if (grid[i][j] != -1) {
+                        youGonnaLoseCtr++;
+                    }
+                    console.log(youGonnaLoseCtr);
+
                     ctr++;
                 }
             }
         }
-        if (ctr == grid[r][c]) {
+        if (ctr == grid[r][c] && youGonnaLoseCtr == 0) {
             for (var i=r-1; i<r+2; i++) {
                 for (var j=c-1; j<c+2; j++) {
                     if (i >=0 && j >= 0 && i<h && j<w && !(isRev[i][j])) {
@@ -125,7 +131,9 @@ function processInputC(x, y) {
                     }
                 }
             }
-        }
+        } else if (youGonnaLoseCtr > 0){
+            loser = -1;
+        } else {}
     }
 }
 
