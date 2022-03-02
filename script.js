@@ -8,9 +8,9 @@ var loser = 0;
 
 
 function setup() {
-    w = 20;
-    h = 10;
-    numMines= 10;
+    w = 13;
+    h = 13;
+    numMines= 30;
 
 
     for (var i=0; i<h; i++) {
